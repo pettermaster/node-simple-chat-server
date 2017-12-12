@@ -1,15 +1,17 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const morgan = require('morgan')
 
-var router = require('./routes');
+const router = require('./routes');
 
 const mongoDB = 'mongodb://localhost/petterMaster';
 mongoose.connect(mongoDB);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, colorize: true}));
+app.use(morgan('combined'));
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -25,7 +27,7 @@ const initRoutes = function () {
 
 initRoutes();
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+app.listen(8080, function () {
+    console.log('Example app listening on port 8080!')
 });
 
