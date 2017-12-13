@@ -6,8 +6,9 @@ const morgan = require('morgan')
 
 const router = require('./routes');
 
-const mongoDB = 'mongodb://localhost/petterMaster';
-mongoose.connect(mongoDB);
+const mongoUrl = process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://localhost/petterMaster';
+console.log(`Attempting to connect to: ${mongoUrl}`);
+mongoose.connect(mongoUrl);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, colorize: true}));
