@@ -1,0 +1,19 @@
+version: "2"
+services:
+
+  server:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    environment:
+          - MONGO_URL=mongodb://mongodb/petterMaster
+
+  mongo:
+    image: mongo:latest
+    container_name: "mongodb"
+    ports:
+      - "27017:27017"
